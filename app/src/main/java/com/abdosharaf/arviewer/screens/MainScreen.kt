@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -44,29 +45,7 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        ARScene(
-            modifier = Modifier.fillMaxSize(),
-            nodes = nodes,
-            planeRenderer = true,
-            onCreate = { arSceneView ->
-                arSceneView.lightEstimationMode = Config.LightEstimationMode.DISABLED
-                arSceneView.planeRenderer.isShadowReceiver = false
-                modelNode.value = ArModelNode(
-                    arSceneView.engine,
-                    PlacementMode.INSTANT,
-                    instantAnchor = true
-                ).apply {
-                    loadModelGlbAsync(
-                        glbFileLocation = "models/${model}.glb",
-                        autoAnimate = true
-                    )
-                }
-                nodes.add(modelNode.value!!)
-            },
-            onSessionCreate = {
-                planeRenderer.isVisible = false
-            }
-        )
+        ARSceneView(nodes, modelNode, model)
 
         Box(
             modifier = Modifier
@@ -80,12 +59,19 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_button),
-                contentDescription = "",
+                contentDescription = "Choose a Model",
                 tint = Color.Unspecified
             )
         }
     }
+}
 
+@Composable
+private fun ARSceneView(
+    nodes: MutableList<ArNode>,
+    modelNode: MutableState<ArModelNode?>,
+    model: String
+) {
     LaunchedEffect(key1 = model) {
         modelNode.value?.loadModelGlbAsync(
             glbFileLocation = "models/${model}.glb",
@@ -93,4 +79,28 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
         )
         Log.e("````TAG````", "MainScreen: loading the model, $model")
     }
+
+    ARScene(
+        modifier = Modifier.fillMaxSize(),
+        nodes = nodes,
+        planeRenderer = true,
+        onCreate = { arSceneView ->
+            arSceneView.lightEstimationMode = Config.LightEstimationMode.DISABLED
+            arSceneView.planeRenderer.isShadowReceiver = false
+            modelNode.value = ArModelNode(
+                arSceneView.engine,
+                PlacementMode.INSTANT,
+                instantAnchor = true
+            ).apply {
+                loadModelGlbAsync(
+                    glbFileLocation = "models/${model}.glb",
+                    autoAnimate = true
+                )
+            }
+            nodes.add(modelNode.value!!)
+        },
+        onSessionCreate = {
+            planeRenderer.isVisible = false
+        }
+    )
 }
