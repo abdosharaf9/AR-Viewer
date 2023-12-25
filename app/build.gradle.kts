@@ -69,4 +69,13 @@ dependencies {
 
     // Scene View
     implementation("io.github.sceneview:arsceneview:0.10.0")
+
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+
+    // Splash API
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // System UI Controller
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 }
