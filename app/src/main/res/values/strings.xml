@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AR Viewer</string>
+    <string name="app_name" translatable="false">AR Viewer</string>
+    <string name="unpin_the_model">Unpin the Model</string>
+    <string name="pin_the_model">Pin the Model</string>
+    <string name="choose_a_model">Choose a Model</string>
 </resources>

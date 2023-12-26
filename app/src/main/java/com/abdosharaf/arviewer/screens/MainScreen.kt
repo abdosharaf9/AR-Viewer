@@ -18,13 +18,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.abdosharaf.arviewer.R
@@ -34,7 +34,6 @@ import com.google.ar.core.Config
 import io.github.sceneview.ar.ARScene
 import io.github.sceneview.ar.ArSceneView
 import io.github.sceneview.ar.node.ArModelNode
-import io.github.sceneview.ar.node.ArNode
 import io.github.sceneview.ar.node.PlacementMode
 
 @Preview
@@ -51,10 +50,6 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
 
     var isAnchor by remember {
         mutableStateOf(false)
-    }
-
-    LaunchedEffect(key1 = isAnchor) {
-        Log.d("```TAG```", "isAnchor = $isAnchor")
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -84,7 +79,8 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_arrows),
-                    contentDescription = if (isAnchor) "Unpin the Model" else "Pin the Model",
+                    contentDescription = if (isAnchor) stringResource(R.string.unpin_the_model)
+                    else stringResource(R.string.pin_the_model),
                     tint = if (isAnchor) SecondColor else Color.Unspecified
                 )
             }
@@ -101,7 +97,7 @@ fun MainScreen(model: String, onButtonClicked: () -> Unit) {
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_logo),
-                    contentDescription = "Choose a Model",
+                    contentDescription = stringResource(R.string.choose_a_model),
                     tint = Color.Unspecified
                 )
             }

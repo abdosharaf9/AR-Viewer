@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unpin_the_model">الغاء تثبيت النموذج</string>
+    <string name="pin_the_model">تثبيت النموذج</string>
+    <string name="choose_a_model">إختر نموذج</string>
+</resources>

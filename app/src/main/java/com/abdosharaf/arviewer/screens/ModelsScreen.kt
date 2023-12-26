@@ -24,12 +24,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.abdosharaf.arviewer.ModelItem
+import com.abdosharaf.arviewer.R
 import com.abdosharaf.arviewer.models
 import com.abdosharaf.arviewer.ui.theme.TextColor
 
@@ -51,7 +53,7 @@ fun ModelsScreen(models: List<ModelItem>, onItemClicked: (String) -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Choose a Model",
+            text = stringResource(id = R.string.choose_a_model),
             modifier = Modifier.padding(top = 16.dp),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
